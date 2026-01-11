@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Interactive 3D Molecular Viewer - Visualize organic chemistry compounds with PubChem integration">
+    <title>3D Molekül Görselleştirici</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Floating Particles Container -->
+    <div id="floating-atoms"></div>
+
+    <!-- Three.js Canvas -->
+    <canvas id="molecule-canvas"></canvas>
+
+    <!-- Search Container -->
+    <div class="search-container">
+        <div class="search-wrapper">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="M21 21l-4.35-4.35"></path>
+            </svg>
+            <input type="text" id="search-input" placeholder="Molekül ara... (örn: Benzene, Ethanol, Caffeine)"
+                autocomplete="off">
+            <button id="search-btn" class="search-btn">
+                <span>Ara</span>
+            </button>
+        </div>
+        <div id="search-suggestions" class="search-suggestions"></div>
+    </div>
+
+    <!-- Loading Indicator -->
+    <div id="loading" class="loading hidden">
+        <div class="loading-spinner"></div>
+        <span>Molekül yükleniyor...</span>
+    </div>
+
+    <!-- Error Message -->
+    <div id="error-message" class="error-message hidden"></div>
+
+    <!-- Info Panel (Glassmorphism) -->
+    <div id="info-panel" class="info-panel hidden">
+        <div class="panel-header">
+            <h2 id="molecule-name">Molekül Adı</h2>
+            <button id="close-panel" class="close-btn">&times;</button>
+        </div>
+
+        <div class="panel-content">
+            <div class="info-section">
+                <h3>Genel Bilgiler</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <span class="info-label">IUPAC Adı</span>
+                        <span id="iupac-name" class="info-value">-</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Molekül Formülü</span>
+                        <span id="molecular-formula" class="info-value">-</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Molekül Ağırlığı</span>
+                        <span id="molecular-weight" class="info-value">-</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Kaynama Noktası</span>
+                        <span id="boiling-point" class="info-value">-</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <h3>Atomik Yapı</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <span class="info-label">Atom Sayısı</span>
+                        <span id="atom-count" class="info-value">-</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Bağ Sayısı</span>
+                        <span id="bond-count" class="info-value">-</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <h3>Element Dağılımı</h3>
+                <div id="element-distribution" class="element-distribution"></div>
+            </div>
+        </div>
+
+        <div class="panel-footer">
+            <span class="hint">🖱️ Döndürmek için sürükle | Yakınlaştırmak için kaydır</span>
+        </div>
+    </div>
+
+    <!-- Legend -->
+    <div class="legend">
+        <h4>Element Renkleri (CPK)</h4>
+        <div class="legend-items">
+            <div class="legend-item">
+                <span class="legend-color" style="background: #909090;"></span>
+                <span>Karbon (C)</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-color" style="background: #FFFFFF; border: 1px solid #333;"></span>
+                <span>Hidrojen (H)</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-color" style="background: #FF0D0D;"></span>
+                <span>Oksijen (O)</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-color" style="background: #3050F8;"></span>
+                <span>Azot (N)</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-color" style="background: #FFFF30;"></span>
+                <span>Kükürt (S)</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-color" style="background: #1FF01F;"></span>
+                <span>Klor (Cl)</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Three.js -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.150.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+
+    <!-- Application -->
+    <script src="app.js"></script>
+</body>
+
+</html>
