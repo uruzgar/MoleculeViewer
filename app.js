@@ -670,9 +670,8 @@ function updateInfoPanel(data) {
         infoPanel.classList.remove('minimized');
     }
 
-    setTimeout(() => {
-        infoPanel.classList.add('visible');
-    }, 100);
+    // Ensure visibility
+    infoPanel.classList.add('visible');
 }
 
 function formatFormula(formula) {
@@ -810,3 +809,5 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('🧪 3D Molekül Görselleştirici başlatıldı!');
     console.log('Örnek moleküller: Benzene, Ethanol, Caffeine, Aspirin, Glucose');
 });
+
+// Updated: 2026-01-18T17:28:00
