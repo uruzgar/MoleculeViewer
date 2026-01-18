@@ -252,13 +252,57 @@ html, body {
     transform: translateX(0);
 }
 
+.info-panel.minimized .panel-content,
+.info-panel.minimized .info-section {
+    display: none;
+}
+
+.info-panel.minimized {
+    max-height: 80px;
+}
+
 .panel-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 24px;
+    padding: 16px 24px;
     border-bottom: 1px solid var(--glass-border);
     background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
+    cursor: pointer;
+}
+
+.panel-controls {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.toggle-btn {
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toggle-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+.info-panel.minimized .toggle-btn svg {
+    transform: rotate(180deg);
+}
+
+.toggle-btn:hover {
+    background: rgba(99, 102, 241, 0.3);
+    color: var(--text-primary);
 }
 
 .panel-header h2 {
@@ -490,13 +534,27 @@ html, body {
     
     .info-panel {
         top: auto;
-        bottom: 0;
-        right: 0;
-        left: 0;
-        width: 100%;
-        max-height: 50vh;
-        border-radius: var(--border-radius) var(--border-radius) 0 0;
-        transform: translateY(100%);
+        bottom: 20px;
+        right: 20px;
+        left: 20px;
+        width: auto;
+        max-height: 70vh;
+        border-radius: var(--border-radius);
+        transform: translateY(120%);
+    }
+    
+    .info-panel.minimized {
+        max-height: 70px;
+        bottom: 20px;
+    }
+
+    .panel-header {
+        padding: 12px 20px;
+    }
+
+    .panel-content {
+        padding: 16px 20px;
+        max-height: 40vh;
     }
     
     .info-panel.visible {

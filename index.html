@@ -53,7 +53,14 @@
     <div id="info-panel" class="info-panel hidden">
         <div class="panel-header">
             <h2 id="molecule-name">Molekül Adı</h2>
-            <button id="close-panel" class="close-btn">&times;</button>
+            <div class="panel-controls">
+                <button id="toggle-panel" class="toggle-btn" title="Genişlet/Daralt">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 15l-6-6-6 6"></path>
+                    </svg>
+                </button>
+                <button id="close-panel" class="close-btn" title="Kapat">&times;</button>
+            </div>
         </div>
 
         <div class="panel-content">
